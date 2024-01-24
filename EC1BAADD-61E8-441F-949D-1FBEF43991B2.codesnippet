@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>codableExtension</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>TopLevel</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>public extension Encodable {
+    var encoded: Data? {
+        try? JSONEncoder().encode(self)
+    }
+}
+
+public extension Data {
+    func decoded&lt;T: Decodable&gt;() -&gt; T? {
+        try? JSONDecoder().decode(T.self, from: self)
+    }
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>EC1BAADD-61E8-441F-949D-1FBEF43991B2</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>CodableExtension</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>0</integer>
+</dict>
+</plist>

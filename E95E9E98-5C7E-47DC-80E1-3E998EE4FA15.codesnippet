@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ciFilterExtension</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>TopLevel</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>public extension UIImage {
+    var ciImage: CIImage {
+        if let cgImage = cgImage {
+            return CIImage(cgImage: cgImage)
+        } else {
+            return CIImage()
+        }
+    }
+}
+
+public extension CIImage {
+    func resize(as size: CGSize) -&gt; CIImage {
+        let selfSize = extent.size
+        let transform = CGAffineTransform(
+            scaleX: size.width / selfSize.width, y: size.height / selfSize.height)
+        return transformed(by: transform)
+    }
+
+    func generateUIImage(orientation: UIImage.Orientation) -&gt; UIImage {
+        guard let newCgImage = CIContext().createCGImage(self, from: extent) else {
+            return UIImage()
+        }
+        return UIImage(cgImage: newCgImage, scale: UIScreen.main.scale, orientation: orientation)
+    }
+}
+
+public extension CIFilter {
+    func generateUIImageFromOutput(orientation: UIImage.Orientation) -&gt; UIImage {
+        guard let outputCIImage = outputImage else { return UIImage() }
+        return outputCIImage.generateUIImage(orientation: orientation)
+    }
+}
+</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>E95E9E98-5C7E-47DC-80E1-3E998EE4FA15</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>CIFilterExtension</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>0</integer>
+</dict>
+</plist>

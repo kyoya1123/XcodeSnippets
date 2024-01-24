@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>colorToImage</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>TopLevel</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>extension UIColor {
+    func image() -&gt; UIImage {
+        let size = CGSize(width: 1, height: 1)
+        return UIGraphicsImageRenderer(size: size).image { rendererContext in
+            setFill()
+            rendererContext.fill(CGRect(origin: .zero, size: size))
+        }
+    }
+}
+
+extension Color {
+    func image() -&gt; UIImage {
+        UIColor(self).image()
+    }
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>BE0466CA-FFFA-40E6-8461-40F9ED1E1479</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>UIColorToUIImage</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>0</integer>
+</dict>
+</plist>

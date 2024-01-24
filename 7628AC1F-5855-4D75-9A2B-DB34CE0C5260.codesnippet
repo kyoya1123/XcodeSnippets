@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>asyncCompactMap</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>TopLevel</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>extension Sequence {
+    func asyncCompactMap&lt;T&gt;(
+        _ transform: @escaping (Element) async throws -&gt; T?
+    ) async rethrows -&gt; [T] {
+        return try await withThrowingTaskGroup(of: (Int, T)?.self) { group in
+            var transformedElements = [Int: T]()
+            
+            for (i, element) in self.enumerated() {
+                group.addTask {
+                    if let transformed = try? await transform(element) {
+                        return (i, transformed)
+                    }
+                    return nil
+                }
+            }
+            
+            for try await transformedElement in group {
+                if let transformedElement {
+                    transformedElements[transformedElement.0] = transformedElement.1
+                }
+            }
+            
+            return transformedElements.sorted {
+                $0.key &lt; $1.key
+            }.map (\.value)
+        }
+    }
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>7628AC1F-5855-4D75-9A2B-DB34CE0C5260</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>AsyncCompactMap</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>0</integer>
+</dict>
+</plist>
